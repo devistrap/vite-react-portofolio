@@ -9,7 +9,7 @@ function App() {
     <nav className=' w-screen bg-gradient-to-r from-blue-300 to-blue-500 h-24 font-serif shadow-2xl'>
 
       <div className='flex flex-col w-fit absolute'>
-        <img src='./logo/png/logo-no-background.png' className='object-cover h-14 w-14 mt-3 animate-spin-slow'></img>
+        <img src='./src/assets/logo-no-background.png' className='object-cover h-14 w-14 mt-3 animate-spin-slow'></img>
         
       </div>
     
