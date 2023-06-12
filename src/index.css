@@ -6,3 +6,8 @@
 #score{
   display: none;
 }
+
+
+*{
+  overflow: hidden;
+}

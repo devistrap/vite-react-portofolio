@@ -1,47 +1,65 @@
-import { Canvas, extend, useThree } from '@react-three/fiber';
-import { Suspense, useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
+import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { Stats, OrbitControls } from '@react-three/drei'
-import React from 'react';
-
-
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 extend({ OrbitControls });
 
 const ModelViewer = () => {
   const modelUrl = '/scene.gltf'; // Update with your model's URL
 
-  const gltf = new GLTFLoader();
-  const [model, setModel] = React.useState(null);
+  const gltfLoader = useRef(new GLTFLoader());
+  const [model, setModel] = useState(null);
   const modelRef = useRef();
   const controlsRef = useRef();
 
   useEffect(() => {
-    gltf.load(modelUrl, (gltf) => {
+    gltfLoader.current.load(modelUrl, (gltf) => {
       setModel(gltf.scene);
     });
   }, [modelUrl]);
 
-  const { camera, gl } = useThree();
-  useEffect(() => {
-    controlsRef.current.addEventListener('change', () => {
-      gl.render();
-    });
-  }, [gl]);
-
   return (
-    <Canvas>
-      <directionalLight intensity={1} position={[0, 5, 0]} />
+    <Canvas  style={{ height: '800px' }}>
+      <directionalLight intensity={0.4} position={[0, 5, 0]} />
+      <directionalLight intensity={0.4} position={[0, -5, 0]} />
+      <directionalLight intensity={0.4} position={[5, 0, 0]} />
+      <directionalLight intensity={0.4} position={[-5, 0, 0]} />
+      <directionalLight intensity={0.4} position={[0, 0, 5]} />
+      <directionalLight intensity={0.4} position={[0, 0, -5]} />
       <Suspense fallback={null}>
-        <perspectiveCamera makeDefault position={[0, 0, 3]} fov={60} />
-        {model && (
-          <>
-            <orbitControls ref={controlsRef} args={[camera, gl.domElement]} />
-            <primitive object={model} scale={[1, 1, 1]} position={[0, 0, 0]} ref={modelRef} />
-          </>
-        )}
+        <ModelScene model={model} modelRef={modelRef} controlsRef={controlsRef} />
       </Suspense>
     </Canvas>
+  );
+};
+
+const ModelScene = ({ model, modelRef, controlsRef }) => {
+  const { camera, scene, gl } = useThree();
+  const [rotationSpeed] = useState(0.009); // Adjust the rotation speed as desired
+
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.y += rotationSpeed;
+    }
+    gl.render(scene, camera);
+  });
+
+  return (
+    <>
+      {model && (
+        <mesh ref={modelRef} scale={[0.06, 0.06, 0.06]}>
+          <primitive object={model} />
+        </mesh>
+      )}
+      <orbitControls
+        ref={controlsRef}
+        args={[camera, gl.domElement]}
+        enableRotate={false}
+        enableZoom={false}
+        enablePan={false}
+      />
+    </>
   );
 };
 

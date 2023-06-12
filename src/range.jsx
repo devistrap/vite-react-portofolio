@@ -36,12 +36,23 @@ class Range extends React.Component {
   submit = () => {
     const {count} = this.state
     this.state.count1 = count
+    document.getElementById("test").disabled = true;
     document.getElementById("score").style.display="block"
+    function myFunction() {
+      document.getElementById("score").style.display="None"
+      document.getElementById("test").disabled = false;
+      
+    }
+    
+    setTimeout(myFunction, 3000);
+    
+    
+
   }
 
   reset = () => {
     const { count } = this.state;
-    this.setState({count: 50})
+    t1his.setState({count: 50})
     document.getElementById("score").style.display="None"
     
   }
@@ -55,16 +66,17 @@ class Range extends React.Component {
           <input type='range' min="0" max="100" value={count} id='test' className=' ml-10 h-4  '  />
           <p className='text-2xl inline text-extrabold'>{count}</p>
           <button onClick={this.submit} name='submit' className='bg-red-500 hover:bg-red-700 text-white font-bold mx-5 py-2 px-4 rounded-full  my-5 w-1/4'>submit</button>
+          
           <div>
             <button onClick={this.addOne} className='bg-blue-500 hover:bg-blue-700 text-white font-bold mx-5 py-2 px-4 rounded-full  my-5 w-1/4'>+1</button>
             <button onClick={this.removeOne} className='bg-blue-500 hover:bg-blue-700 text-white font-bold mx-5 py-2 px-4 rounded-full  my-5 w-1/4'>-1</button>
             <button onClick={this.reset} className='bg-red-500 hover:bg-red-700 text-white font-bold mx-5 py-2 px-4 rounded-full  my-5 w-1/4'>reset</button>
+            
           </div>
           
           
           <p id='score'>de waarde van de schuifbar is {this.state.count1}</p>
 
-      
       </div>
     );
   }
