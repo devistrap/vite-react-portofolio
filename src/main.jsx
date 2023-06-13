@@ -8,7 +8,10 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
+    <div className='bg-gradient-to-l from-blue-700 to-blue-400'>
     <ModelViewer />
+    </div>
     <Range />
+    
   </React.StrictMode>,
 )

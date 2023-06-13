@@ -20,7 +20,9 @@ const ModelViewer = () => {
   }, [modelUrl]);
 
   return (
-    <Canvas  style={{ height: '800px' }}>
+    <div >
+    <h1 className='text-6xl absolute top-32 text-purple-800'>welcome to my portofolio</h1>
+    <Canvas  style={{ height: '800px' }} className='w-full'>
       <directionalLight intensity={0.4} position={[0, 5, 0]} />
       <directionalLight intensity={0.4} position={[0, -5, 0]} />
       <directionalLight intensity={0.4} position={[5, 0, 0]} />
@@ -31,12 +33,13 @@ const ModelViewer = () => {
         <ModelScene model={model} modelRef={modelRef} controlsRef={controlsRef} />
       </Suspense>
     </Canvas>
+    </div>
   );
 };
 
 const ModelScene = ({ model, modelRef, controlsRef }) => {
   const { camera, scene, gl } = useThree();
-  const [rotationSpeed] = useState(0.009); // Adjust the rotation speed as desired
+  const [rotationSpeed] = useState(0.005); // Adjust the rotation speed as desired
 
   useFrame(() => {
     if (modelRef.current) {

@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
   return (
-    <nav className=' w-screen bg-gradient-to-r from-blue-300 to-blue-500 h-24 font-serif shadow-2xl'>
+    <nav className='shadow-2xl w-screen bg-gradient-to-r from-blue-300 to-blue-500 h-24 font-serif shadow-2xl border-b-2 border-black'>
 
       <div className='flex flex-col w-fit absolute'>
         <img src='./src/assets/logo-no-background.png' className='object-cover h-14 w-14 mt-3 animate-spin-slow'></img>
