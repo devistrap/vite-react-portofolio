@@ -21,7 +21,7 @@ const ModelViewer = () => {
 
   return (
     <div >
-    <h1 className='text-6xl absolute top-32 text-purple-800'>welcome to my portofolio</h1>
+    <h1 className='text-6xl absolute top-32 text-purple-800 headline'>welcome to my portofolio</h1>
     <Canvas  style={{ height: '800px' }} className='w-full'>
       <directionalLight intensity={0.4} position={[0, 5, 0]} />
       <directionalLight intensity={0.4} position={[0, -5, 0]} />
