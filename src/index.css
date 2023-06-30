@@ -4,8 +4,9 @@
 @tailwind utilities;
 
 
-
-
+html{
+  scroll-behavior: smooth ;
+}
 
 #score{
   display: none;
@@ -19,3 +20,4 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
